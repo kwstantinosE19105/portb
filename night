@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konstantinos Balla | Mobile Portfolio</title>
+    <meta name="description" content="Mobile portfolio for Konstantinos Balla" />
+
+    <style>
+      :root {
+        --bg: #070b1a;
+        --bg-soft: rgba(10, 16, 36, 0.86);
+        --panel: rgba(16, 23, 48, 0.78);
+        --panel-strong: rgba(18, 27, 56, 0.95);
+        --text: #f5f7ff;
+        --muted: #aab4d4;
+        --cyan: #4de2ff;
+        --pink: #ff4fd8;
+        --purple: #8f7cff;
+        --border: rgba(255, 255, 255, 0.12);
+        --shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+        --radius: 24px;
+        --radius-sm: 18px;
+        --page-pad: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Inter, Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 10% 0%, rgba(77, 226, 255, 0.2), transparent 30%),
+          radial-gradient(circle at 90% 20%, rgba(255, 79, 216, 0.2), transparent 28%),
+          linear-gradient(rgba(7, 11, 26, 0.78), rgba(7, 11, 26, 0.9)),
+          url("./backround.png") center / cover no-repeat fixed;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        filter: blur(90px);
+        opacity: 0.25;
+        z-index: -2;
+        pointer-events: none;
+        animation: floatGlow 10s ease-in-out infinite;
+      }
+
+      body::before {
+        top: -80px;
+        left: -110px;
+        background: var(--cyan);
+      }
+
+      body::after {
+        right: -100px;
+        bottom: 10%;
+        background: var(--pink);
+        animation-delay: 2s;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .phone-shell {
+        width: min(100%, 480px);
+        margin: 0 auto;
+        padding: 0 var(--page-pad) 32px;
+      }
+
+      .section {
+        padding: 42px 0 0;
+      }
+
+      .section-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        color: var(--cyan);
+        font-size: 0.76rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .section-kicker::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--cyan), transparent);
+      }
+
+      .section-title {
+        margin-bottom: 14px;
+        font-size: clamp(1.85rem, 8vw, 2.55rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+      }
+
+      .section-title span,
+      .gradient-text {
+        background: linear-gradient(90deg, var(--cyan), var(--pink));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .glass-card {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(16px);
+      }
+
+      .glass-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(77, 226, 255, 0.08), transparent 42%, rgba(255, 79, 216, 0.08));
+        pointer-events: none;
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 12px 0;
+        background: rgba(7, 11, 26, 0.66);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .nav-inner {
+        width: min(100%, 480px);
+        margin: 0 auto;
+        padding: 0 var(--page-pad);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        text-decoration: none;
+        font-size: 1.35rem;
+        font-weight: 950;
+        background:
+          linear-gradient(var(--bg), var(--bg)) padding-box,
+          linear-gradient(135deg, var(--cyan), var(--pink)) border-box;
+        border: 3px solid transparent;
+        box-shadow: 0 0 28px rgba(77, 226, 255, 0.22);
+      }
+
+      .menu-toggle {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.08);
+        cursor: pointer;
+      }
+
+      .menu-toggle span,
+      .menu-toggle::before,
+      .menu-toggle::after {
+        content: "";
+        display: block;
+        width: 21px;
+        height: 2px;
+        margin: 3px 0;
+        border-radius: 999px;
+        background: currentColor;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      .menu-toggle.active::before {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .menu-toggle.active span {
+        opacity: 0;
+      }
+
+      .menu-toggle.active::after {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 78px;
+        left: 18px;
+        right: 18px;
+        max-width: 444px;
+        margin: 0 auto;
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: rgba(9, 14, 32, 0.96);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px) scale(0.98);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      .nav-links a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 13px 14px;
+        border-radius: 16px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.05);
+        text-decoration: none;
+        font-weight: 800;
+      }
+
+      .nav-links a::after {
+        content: "↗";
+        color: var(--cyan);
+      }
+
+      .hero {
+        padding: 32px 0 0;
+      }
+
+      .tag {
+        width: fit-content;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 18px;
+        padding: 8px 13px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--cyan);
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        max-width: 390px;
+        margin-bottom: 18px;
+        font-size: clamp(2.55rem, 11vw, 4.1rem);
+        line-height: 0.98;
+        letter-spacing: -0.06em;
+      }
+
+      .hero h1 span {
+        display: inline-block;
+        background: linear-gradient(90deg, var(--cyan), var(--pink));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .intro {
+        margin-bottom: 24px;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .button {
+        min-height: 52px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 16px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 900;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+
+      .button:active {
+        transform: scale(0.98);
+      }
+
+      .button-primary {
+        color: #07101f;
+        background: linear-gradient(90deg, var(--cyan), var(--pink));
+        box-shadow: 0 14px 34px rgba(77, 226, 255, 0.18);
+      }
+
+      .button-secondary {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .hero-socials {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .hero-socials a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 0 13px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.88rem;
+        font-weight: 800;
+      }
+
+      .hero-card {
+        padding: 16px;
+      }
+
+      .hero-photo {
+        overflow: hidden;
+        aspect-ratio: 1 / 1.12;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-photo img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .photo-note {
+        margin-top: 12px;
+        padding: 13px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hero-stats {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .stat {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 13px;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 17px;
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .stat-icon {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 13px;
+        color: var(--cyan);
+        background: rgba(77, 226, 255, 0.08);
+        border: 1px solid rgba(77, 226, 255, 0.16);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.2rem;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .about-card {
+        margin-top: 20px;
+        padding: 20px;
+      }
+
+      .about-list {
+        position: relative;
+        list-style: none;
+        display: grid;
+        gap: 13px;
+      }
+
+      .about-list li {
+        display: flex;
+        gap: 11px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .about-list li::before {
+        content: "✓";
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        color: var(--cyan);
+        background: rgba(77, 226, 255, 0.08);
+        border: 1px solid rgba(77, 226, 255, 0.2);
+        font-weight: 900;
+      }
+
+      .skill-pills {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 18px;
+      }
+
+      .skill-pills span {
+        padding: 8px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        font-size: 0.84rem;
+        font-weight: 800;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding: 18px 18px 18px 48px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 24px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--cyan), var(--pink));
+        box-shadow: 0 0 18px rgba(77, 226, 255, 0.5);
+      }
+
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 26px;
+        top: 38px;
+        bottom: -15px;
+        width: 1px;
+        background: linear-gradient(var(--cyan), transparent);
+        opacity: 0.5;
+      }
+
+      .timeline-item:last-child::after {
+        display: none;
+      }
+
+      .timeline-top {
+        display: grid;
+        gap: 4px;
+      }
+
+      .timeline-top h3 {
+        color: var(--text);
+        font-size: 1.02rem;
+        line-height: 1.25;
+      }
+
+      .timeline-date {
+        color: var(--cyan);
+        font-size: 0.88rem;
+        font-weight: 900;
+      }
+
+      .timeline-company {
+        margin-top: 8px;
+        color: var(--pink);
+        font-weight: 800;
+      }
+
+      .timeline-text {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .project-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .project-card-link {
+        text-decoration: none;
+      }
+
+      .project-card {
+        overflow: hidden;
+      }
+
+      .project-media {
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .project-media img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .project-body {
+        position: relative;
+        padding: 18px;
+      }
+
+      .project-tag {
+        display: inline-flex;
+        margin-bottom: 10px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        color: var(--cyan);
+        background: rgba(77, 226, 255, 0.08);
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .project-body h3 {
+        margin-bottom: 8px;
+        font-size: 1.15rem;
+      }
+
+      .project-body p {
+        margin-bottom: 14px;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .project-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .project-footer span:last-child {
+        color: var(--cyan);
+      }
+
+      .contact-grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .contact-card,
+      .cta-card {
+        padding: 20px;
+      }
+
+      .contact-list {
+        position: relative;
+        list-style: none;
+        display: grid;
+        gap: 15px;
+      }
+
+      .contact-list li {
+        display: grid;
+        gap: 4px;
+      }
+
+      .contact-list strong {
+        color: var(--text);
+        font-size: 0.92rem;
+      }
+
+      .contact-list a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.94rem;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+
+      .cta-card h3 {
+        position: relative;
+        margin-bottom: 10px;
+        font-size: 1.35rem;
+        line-height: 1.16;
+      }
+
+      .cta-card p {
+        position: relative;
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .cta-card .button {
+        position: relative;
+        width: 100%;
+      }
+
+      .footer {
+        padding: 36px 0 20px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.82rem;
+      }
+
+      .to-top {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 990;
+        width: 48px;
+        height: 48px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 50%;
+        color: var(--text);
+        background: rgba(7, 11, 26, 0.76);
+        backdrop-filter: blur(14px);
+        cursor: pointer;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.65s ease, transform 0.65s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes floatGlow {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+        }
+
+        50% {
+          transform: translateY(18px) scale(1.05);
+        }
+      }
+
+      @media (min-width: 760px) {
+        .phone-shell,
+        .nav-inner {
+          max-width: 740px;
+        }
+
+        .hero-buttons {
+          max-width: 390px;
+        }
+
+        .hero-card {
+          display: grid;
+          grid-template-columns: 0.95fr 1fr;
+          gap: 14px;
+          align-items: start;
+        }
+
+        .project-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="nav-inner">
+        <a href="#home" class="logo" aria-label="KB home">KB</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+        </button>
+
+        <div class="nav-links" id="navLinks">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="phone-shell">
+      <header class="hero" id="home">
+        <div class="reveal">
+          <p class="tag">Portfolio • Web Designer • Cybersecurity</p>
+
+          <h1>Hello, I'm <span>Konstantinos Balla</span></h1>
+
+          <p class="intro">
+            I’m a cybersecurity professional focused on identifying vulnerabilities, securing web applications,
+            and strengthening system defenses through practical, real-world security work.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#projects" class="button button-primary">View Projects →</a>
+            <a href="#contact" class="button button-secondary">Contact Me</a>
+          </div>
+
+          <div class="hero-socials" aria-label="Social links">
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+
+        <aside class="hero-card glass-card reveal" aria-label="Profile summary">
+          <div>
+            <div class="hero-photo">
+              <img src="./photo1.png" alt="Konstantinos Balla portrait" />
+            </div>
+            <div class="photo-note">
+              Always learning, always securing.
+            </div>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-icon">🛡</div>
+              <div>
+                <strong>1+</strong>
+                <span>Years in Cybersecurity</span>
+              </div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-icon">⌘</div>
+              <div>
+                <strong>3+</strong>
+                <span>Websites Built</span>
+              </div>
+            </div>
+
+            <div class="stat">
+              <div class="stat-icon">☏</div>
+              <div>
+                <strong>3+</strong>
+                <span>Years in Customer Service</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </header>
+
+      <main>
+        <section id="about" class="section">
+          <div class="section-kicker reveal">About</div>
+          <h2 class="section-title reveal">Cybersecurity work with <span>real-world impact.</span></h2>
+          <p class="section-copy reveal">
+            I combine security knowledge, technical problem-solving, and a strong eye for clean digital experiences.
+          </p>
+
+          <div class="about-card glass-card reveal">
+            <ul class="about-list">
+              <li>I identify vulnerabilities and help improve system and application security.</li>
+              <li>I build responsive websites that look polished on desktop, tablet, and mobile.</li>
+              <li>I combine cybersecurity, frontend development, and usability into one strong digital experience.</li>
+            </ul>
+
+            <div class="skill-pills" aria-label="Skills">
+              <span>SIEM</span>
+              <span>EDR</span>
+              <span>JavaScript</span>
+              <span>UI Design</span>
+              <span>Critical Thinking</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" class="section">
+          <div class="section-kicker reveal">Experience</div>
+          <h2 class="section-title reveal">Selected roles and technical work.</h2>
+
+          <div class="timeline">
+            <article class="timeline-item glass-card reveal">
+              <div class="timeline-top">
+                <h3>Cybersecurity SOC Analyst</h3>
+                <span class="timeline-date">2025–2026</span>
+              </div>
+              <p class="timeline-company">CBS-LAN</p>
+              <p class="timeline-text">
+                Monitored, detected, investigated, and responded to cybersecurity threats in real time.
+              </p>
+            </article>
+
+            <article class="timeline-item glass-card reveal">
+              <div class="timeline-top">
+                <h3>Back Office Employee</h3>
+                <span class="timeline-date">2025</span>
+              </div>
+              <p class="timeline-company">Mediatel</p>
+              <p class="timeline-text">
+                Worked on the migration of DEH from SAP to Salesforce.
+              </p>
+            </article>
+
+            <article class="timeline-item glass-card reveal">
+              <div class="timeline-top">
+                <h3>Network Engineer</h3>
+                <span class="timeline-date">2024–2025</span>
+              </div>
+              <p class="timeline-company">OPAP-ALLWIN</p>
+              <p class="timeline-text">
+                Helped keep company virtual machines, servers, and network infrastructure reliable.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="projects" class="section">
+          <div class="section-kicker reveal">Projects</div>
+          <h2 class="section-title reveal">Projects that reflect both design and security.</h2>
+          <p class="section-copy reveal">
+            Replace the sample links with your live project URLs when they are ready.
+          </p>
+
+          <div class="project-grid">
+            <a href="https://your-nail-salon-website.com" target="_blank" rel="noopener" class="project-card-link reveal">
+              <article class="project-card glass-card">
+                <div class="project-media">
+                  <img src="./project1.png" alt="Preview of Nail Salon Website" />
+                </div>
+                <div class="project-body">
+                  <span class="project-tag">Web Design</span>
+                  <h3>Nail Salon Website</h3>
+                  <p>A stylish beauty brand website with a premium feel and elegant visual presentation.</p>
+                  <div class="project-footer">
+                    <span>Brand / Web</span>
+                    <span>Open ↗</span>
+                  </div>
+                </div>
+              </article>
+            </a>
+
+            <a href="https://your-project-two-link.com" target="_blank" rel="noopener" class="project-card-link reveal">
+              <article class="project-card glass-card">
+                <div class="project-media">
+                  <img src="./project1.png" alt="Preview of SIEM Monitoring Lab" />
+                </div>
+                <div class="project-body">
+                  <span class="project-tag">SIEM Lab</span>
+                  <h3>SIEM Monitoring Lab</h3>
+                  <p>A hands-on project focused on log monitoring, alert analysis, and threat detection workflows.</p>
+                  <div class="project-footer">
+                    <span>Security Ops</span>
+                    <span>Open ↗</span>
+                  </div>
+                </div>
+              </article>
+            </a>
+
+            <a href="https://your-project-three-link.com" target="_blank" rel="noopener" class="project-card-link reveal">
+              <article class="project-card glass-card">
+                <div class="project-media">
+                  <img src="./project1.png" alt="Preview of Next-Generation Firewall project" />
+                </div>
+                <div class="project-body">
+                  <span class="project-tag">Firewall</span>
+                  <h3>Next-Generation Firewall</h3>
+                  <p>A project focused on modern firewall configuration, traffic control, and perimeter security.</p>
+                  <div class="project-footer">
+                    <span>Infrastructure</span>
+                    <span>Open ↗</span>
+                  </div>
+                </div>
+              </article>
+            </a>
+          </div>
+        </section>
+
+        <section id="contact" class="section">
+          <div class="section-kicker reveal">Contact</div>
+          <h2 class="section-title reveal">Let’s work together.</h2>
+          <p class="section-copy reveal">
+            Open to freelance work, collaborations, and cybersecurity opportunities.
+          </p>
+
+          <div class="contact-grid">
+            <div class="contact-card glass-card reveal">
+              <ul class="contact-list">
+                <li>
+                  <strong>Email</strong>
+                  <a href="mailto:kwstantinosballa@hotmail.com">kwstantinosballa@hotmail.com</a>
+                </li>
+                <li>
+                  <strong>Instagram</strong>
+                  <a href="https://instagram.com/yourhandle" target="_blank" rel="noopener">Konstantinos._.mp</a>
+                </li>
+                <li>
+                  <strong>LinkedIn</strong>
+                  <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener">linkedin.com</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="cta-card glass-card reveal">
+              <h3><span class="gradient-text">Available for freelance and technical collaborations.</span></h3>
+              <p>
+                Need a portfolio, landing page, security-focused website, or modern redesign?
+              </p>
+              <a href="mailto:kwstantinosballa@hotmail.com" class="button button-primary">Send an Email →</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        © <span id="year"></span> Konstantinos Balla. Built for impact.
+      </footer>
+    </div>
+
+    <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      const navAnchors = [...document.querySelectorAll(".nav-links a")];
+      const revealItems = document.querySelectorAll(".reveal");
+      const toTop = document.getElementById("toTop");
+      const year = document.getElementById("year");
+
+      year.textContent = new Date().getFullYear();
+
+      const closeMenu = () => {
+        navLinks.classList.remove("open");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menu-open");
+      };
+
+      const toggleMenu = () => {
+        const isOpen = navLinks.classList.toggle("open");
+        menuToggle.classList.toggle("active", isOpen);
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        document.body.classList.toggle("menu-open", isOpen);
+      };
+
+      menuToggle.addEventListener("click", toggleMenu);
+      navAnchors.forEach((link) => link.addEventListener("click", closeMenu));
+
+      window.addEventListener("scroll", () => {
+        toTop.classList.toggle("visible", window.scrollY > 500);
+      });
+
+      toTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      revealItems.forEach((item) => observer.observe(item));
+    </script>
+  </body>
+</html>
